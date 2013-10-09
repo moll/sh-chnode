@@ -54,6 +54,7 @@ chnode() {
 
 			[ -z "$root" ] && echo "Sorry, couldn't locate Node v$version." && return
 			PATH=$root:$PATH
+			echo "Switched to Node v$1 at $root."
 
 			# Have shell refresh its cache of binaries.
 			hash -r
