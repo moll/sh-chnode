@@ -3,21 +3,39 @@ if [ -z "$PS1" -a -z "$PS2" ]; then
 	echo "Please source chnode to your shell with \". $0\"."
 fi
 
+# Variable to hold all found Node version paths.
 NODES=()
-[ -d /usr/local/Cellar/node ] && NODES+=(/usr/local/Cellar/node/*)
 
 chnode() {
+	[ -z "$NODES" ] && NODES=1 && chnode --silent-refresh
+
 	case "$1" in
 		"" | -h | -\? | --help)
 			echo "Usage: chnode [OPTIONS] VERSION"
 			echo
 			echo "Options:"
 			echo "    -h, -?, --help  Display this help."
+			echo "    -r, --refresh   Refresh and find all available Node versions."
+			echo "    -l, --list      List all available Node versions."
 			echo
 			echo "Available Node versions:"
+			CHNODE_INDENT="    " chnode --list
+			;;
 
+		-r | --refresh)
+			echo "Refreshing..."
+			chnode --silent-refresh
+			chnode --list
+			;;
+
+		--silent-refresh)
+			NODES=()
+			[ -d /usr/local/Cellar/node ] && NODES+=(/usr/local/Cellar/node/*)
+			;;
+
+		-l | --list)
 			local dir
-			for dir in "${NODES[@]}"; do echo "    $(basename "$dir")"; done
+			for dir in "${NODES[@]}"; do echo "$CHNODE_INDENT$(basename "$dir")"; done
 			;;
 
 		*)
