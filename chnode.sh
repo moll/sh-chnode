@@ -44,7 +44,7 @@ chnode() {
 
 			# Clean up PATH from old Node versions and ugly stray colons.
 			local dir
-			for dir in "${NODES[@]}"; do PATH=${PATH/${dir}/}; done
+			for dir in "${NODES[@]}"; do PATH=${PATH/${dir}\/bin/}; done
 			PATH=${PATH/::/}; PATH=${PATH#:}; PATH=${PATH%:}
 
 			local root
@@ -53,7 +53,7 @@ chnode() {
 			done
 
 			[ -z "$root" ] && echo "Sorry, couldn't locate Node $version." && return
-			PATH=$root:$PATH
+			PATH=$root/bin:$PATH
 			echo "Switched to Node $version at $root."
 
 			# Have shell refresh its cache of binaries.
