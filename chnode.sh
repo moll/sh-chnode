@@ -51,8 +51,9 @@ chnode() {
 
 			# Clean up PATH from old Node versions and ugly stray colons.
 			local dir
-			for dir in "${NODES[@]}"; do PATH=${PATH/${dir}\/bin/}; done
-			PATH=${PATH/::/}; PATH=${PATH#:}; PATH=${PATH%:}
+			PATH=":$PATH:"
+			for dir in "${NODES[@]}"; do PATH=${PATH/:${dir}\/bin:/:}; done
+			PATH=${PATH#:}; PATH=${PATH%:}
 
 			local root
 			for dir in "${NODES[@]}"; do
