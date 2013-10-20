@@ -18,8 +18,15 @@ chnode() {
 			echo "    -r, --refresh   Refresh and find all available Node versions."
 			echo "    -l, --list      List all available Node versions."
 			echo
+
 			echo "Available Node versions:"
-			CHNODE_INDENT="    " chnode --list
+			local current="$(node --version 2>/dev/null)"; current=${current#v}
+			local version
+			for version in $(chnode --list); do
+				local marker=
+				[ -n "$current" -a "$current" = "$version" ] && marker=" *"
+				echo "    $version$marker"
+			done
 			;;
 
 		-r | --refresh)
@@ -35,7 +42,7 @@ chnode() {
 
 		-l | --list)
 			local dir
-			for dir in "${NODES[@]}"; do echo "$CHNODE_INDENT$(basename "$dir")"; done
+			for dir in "${NODES[@]}"; do echo "$(basename "$dir")"; done
 			;;
 
 		*)
