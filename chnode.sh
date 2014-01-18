@@ -1,6 +1,7 @@
 #!/bin/sh
 if [ -z "$PS1" -a -z "$PS2" ]; then
-	echo "Please source chnode to your shell with \". $0\"."
+	echo "Please load chnode to your shell with: . $0" >&2
+	exit 1
 fi
 
 # Variable to hold all found Node version paths.
