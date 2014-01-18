@@ -28,6 +28,10 @@ chnode() {
 				[ -n "$current" -a "$current" = "$version" ] && marker=" *"
 				echo "    $version$marker"
 			done
+
+			echo
+			echo "For help or feedback please contact Andri Möll <andri@dot.ee> or"
+			echo "see https://github.com/moll/chnode."
 			;;
 
 		-r | --refresh)
