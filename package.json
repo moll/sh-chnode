@@ -1,6 +1,6 @@
 {
 	"name": "chnode",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"preferGlobal": true,
 	"description": "Change between installed Node version in your shell.",
 	"keywords": ["node", "shell"],
