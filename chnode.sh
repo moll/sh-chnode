@@ -31,7 +31,7 @@ chnode() {
 
 			echo
 			echo "For help or feedback please contact Andri Möll <andri@dot.ee> or"
-			echo "see https://github.com/moll/chnode."
+			echo "see https://github.com/moll/sh-chnode."
 			;;
 
 		-r | --refresh)

@@ -4,8 +4,8 @@
 	"preferGlobal": true,
 	"description": "Change between installed Node version in your shell.",
 	"keywords": ["node", "shell"],
-	"homepage": "https://github.com/moll/chnode",
-	"bugs": "https://github.com/moll/chnode/issues",
+	"homepage": "https://github.com/moll/sh-chnode",
+	"bugs": "https://github.com/moll/sh-chnode/issues",
 
 	"author": {
 		"name": "Andri Möll",
@@ -15,12 +15,12 @@
 
 	"repository": {
 		"type": "git",
-		"url": "git://github.com/moll/chnode.git"
+		"url": "git://github.com/moll/sh-chnode.git"
 	},
 
 	"licenses": [{
 		"type": "LAGPL",
-		"url": "https://github.com/moll/chnode/blob/master/LICENSE"
+		"url": "https://github.com/moll/sh-chnode/blob/master/LICENSE"
 	}],
 
 	"bin": "./chnode.sh"
