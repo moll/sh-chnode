@@ -24,6 +24,30 @@ Side note: I'm terribly ashamed of not yet having tests!
 
 [kiss]: https://en.wikipedia.org/wiki/Keep_it_simple_stupid
 
+### Differences
+There are a few existing tools for switching Node versions, so how does
+Chnode.sh differ?
+- It **does not** manage installations.  
+  Existing package managers (GNU/Linux distros', Homebrew etc.) do a better job
+  of installing or compiling securely than such scripts.
+- It's **really lightweight** — just a single shell function.  
+  No build tools or compilers necessary.
+- It changes the node version **only for the current shell session**.  
+  Tools like [N][n] or [NVM][nvm] affect the entire system or all open shells.
+  That's why if you need to test a single app in multiple Node versions,
+  Chnode.sh comes very handy.
+
+### Alternatives
+If you do insist on compiling and installing Nodes via 3rd party tools, check
+these out:
+- [NVM][nvm]
+- [N][n]
+- [Nodist][nodist]
+
+[nvm]: https://github.com/brianloveswords/nvm
+[n]: https://github.com/visionmedia/n
+[nodist]: https://github.com/marcelklehr/nodist
+
 
 Installing
 ----------
