@@ -67,7 +67,7 @@ On the Mac Chnode.sh will find installed Nodes in `/usr/local/Cellar/node`.
 If you've got installations somewhere else, set the `NODES` variable to an
 **array of paths** of **individual versions**:
 ```sh
-NODES+=(~./.nodes/*)
+NODES+=(~/.nodes/*)
 ```
 
 For example, if you've got Node compiled from the source at
