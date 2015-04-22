@@ -13,6 +13,7 @@ chnode() {
 	case "$1" in
 		"" | -h | -\? | --help)
 			echo "Usage: chnode [OPTIONS] VERSION"
+			echo "       chnode [OPTIONS] system"
 			echo
 			echo "Options:"
 			echo "    -h, -?, --help  Display this help."
@@ -59,6 +60,8 @@ chnode() {
 			PATH=":$PATH:"
 			for dir in "${NODES[@]}"; do PATH=${PATH/:${dir}\/bin:/:}; done
 			PATH=${PATH#:}; PATH=${PATH%:}
+
+			[ "$version" = system ] && return
 
 			local root
 			for dir in "${NODES[@]}"; do

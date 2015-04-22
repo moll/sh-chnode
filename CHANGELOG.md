@@ -1,6 +1,7 @@
 ## Unreleased
 - Detects current version correctly should it contain a revision number
   (v0.12.2_1).
+- Adds special `system` version for removing all Node paths from `$PATH`.
 
 ## 1.0.1 (Jan 18, 2014)
 - Changes repository URL.

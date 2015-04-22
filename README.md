@@ -77,6 +77,11 @@ Change between installed Node versions with:
 chnode 0.11.7
 ```
 
+To go back to the system version:
+```sh
+chnode system
+```
+
 ### Options
 Option           | Description
 -----------------|------------
