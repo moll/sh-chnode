@@ -25,7 +25,7 @@ chnode() {
 			local version
 			for version in $(chnode --list); do
 				local marker=
-				[ -n "$current" -a "$current" = "$version" ] && marker=" *"
+				[ -n "$current" -a "$current" = "${version%_*}" ] && marker=" *"
 				echo "    $version$marker"
 			done
 
