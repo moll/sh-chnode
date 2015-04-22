@@ -2,7 +2,7 @@ love:
 	@echo "Feel like makin' love."
 
 pack:
-	npm pack
+	@file=$$(npm pack); echo "$$file"; tar tf "$$file"
 
 publish:
 	npm publish
