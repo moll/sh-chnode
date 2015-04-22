@@ -1,4 +1,4 @@
-## Unreleased
+## 1.1.0 (Apr 22, 2015)
 - Detects current version correctly should it contain a revision number
   (v0.12.2_1).
 - Adds special `system` version for removing all Node paths from `$PATH`.

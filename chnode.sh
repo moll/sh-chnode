@@ -37,7 +37,7 @@ chnode() {
 			;;
 
 		-v | --version)
-			echo "Chnode.sh v1.0.1"
+			echo "Chnode.sh v1.1.0"
 			echo "Copyright (C) 2013– Andri Möll <andri@dot.ee>"
 			;;
 
