@@ -17,8 +17,9 @@ chnode() {
 			echo
 			echo "Options:"
 			echo "    -h, -?, --help  Display this help."
-			echo "    -r, --refresh   Refresh and find all available Node versions."
 			echo "    -l, --list      List all available Node versions."
+			echo "    -r, --refresh   Refresh and find all available Node versions."
+			echo "    -v, --version   Display version information."
 			echo
 
 			echo "Available Node versions:"
@@ -33,6 +34,11 @@ chnode() {
 			echo
 			echo "For help or feedback please contact Andri Möll <andri@dot.ee> or"
 			echo "see https://github.com/moll/sh-chnode."
+			;;
+
+		-v | --version)
+			echo "Chnode.sh v1.0.1"
+			echo "Copyright (C) 2013– Andri Möll <andri@dot.ee>"
 			;;
 
 		-r | --refresh)

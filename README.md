@@ -86,8 +86,9 @@ chnode system
 Option           | Description
 -----------------|------------
 `-h, -?, --help `| Display this help.
-`-r, --refresh  `| Refresh and find all available Node versions.
 `-l, --list     `| List all available Node versions.
+`-r, --refresh  `| Refresh and find all available Node versions.
+`-v, --version  `| Display version information.
 
 
 Configuring
