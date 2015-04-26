@@ -112,7 +112,15 @@ chnode() {
 		[ "$(basename "$dir")" = "$1" ] && root=$dir && break
 	done
 
-	[ -z "$root" ] && echo "Sorry, couldn't locate Node $1" && return 1
+	if [ -z "$root" ]; then
+		echo "Sorry, couldn't locate Node $1."
+		echo
+		echo "Available Node versions:"
+		local version=
+		for version in $(chnode --list); do echo "    $version"; done
+		return 1
+	fi
+
 	PATH=$root/bin:$PATH
 
 	# No news is good news.
