@@ -74,7 +74,17 @@ Using
 -----
 Change between installed Node versions with:
 ```sh
-chnode 0.11.7
+chnode 0.12.2
+```
+
+To change to the latest installed v0.11.x (e.g. Node 0.11.15):
+```sh
+chnode 0.11
+```
+
+To change to the latest v0.x:
+```sh
+chnode 0
 ```
 
 To go back to the system version:

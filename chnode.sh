@@ -108,8 +108,29 @@ chnode() {
 	[ "$1" = system ] && return
 
 	local root=
+	local version=
+
 	for dir in "${NODES[@]}"; do
-		[ "$(basename "$dir")" = "$1" ] && root=$dir && break
+		version="$(basename "$dir")"
+		[ "${version#v}" = "$1" ] && root=$dir && break
+	done
+
+	# Prefix match finds the *latest* suitable version, so no early break.
+	[ -z "$root" ] && for dir in "${NODES[@]}"; do
+		version="$(basename "$dir")"
+		case "${version#v}" in
+			# 0      => 0.12.2
+			# 0.11   => 0.11.15
+			# 0.12.2 => 0.12.2-1
+			# 0.12.2 => 0.12.2_1
+			"$1".*.* | \
+			"$1".*   | \
+			"$1"-*   | \
+			"$1"_*   )
+				root=$dir
+				verbose=1
+				;;
+		esac
 	done
 
 	if [ -z "$root" ]; then
