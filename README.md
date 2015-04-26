@@ -88,8 +88,8 @@ Option           | Description
 `-h, -?, --help `| Display this help.
 `-l, --list     `| List all available Node versions.
 `-r, --refresh  `| Refresh and find all available Node versions.
-`-V, --verbose  `| Be verbose when changing versions.
-`-v, --version  `| Display version information.
+`-v, --verbose  `| Be verbose when changing versions.
+`-V, --version  `| Display version information.
 
 
 Configuring

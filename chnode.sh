@@ -34,8 +34,8 @@ chnode() {
 				echo "    -h, -?, --help  Display this help."
 				echo "    -l, --list      List all available Node versions."
 				echo "    -r, --refresh   Refresh and find all available Node versions."
-				echo "    -V, --verbose   Be verbose when changing versions."
-				echo "    -v, --version   Display version information."
+				echo "    -v, --verbose   Be verbose when changing versions."
+				echo "    -V, --version   Display version information."
 				echo
 
 				echo "Available Node versions:"
@@ -53,11 +53,11 @@ chnode() {
 				return
 				;;
 
-			-V | --verbose)
+			-v | --verbose)
 				verbose=1
 				;;
 
-			-v | --version)
+			-V | --version)
 				echo "Chnode.sh v1.1.0"
 				echo "Copyright (C) 2013– Andri Möll <andri@dot.ee>"
 				return
