@@ -97,7 +97,7 @@ chnode() {
 	[ $# -gt 1 ] && chnode --usage >&2 && return 2
 
 	# Support both v0.11.5 and 0.11.5 syntax.
-	local version="${1#v}"
+	: 1=${1#v}
 
 	# Clean up PATH from old Node versions and ugly stray colons.
 	local dir=
@@ -105,14 +105,14 @@ chnode() {
 	for dir in "${NODES[@]}"; do PATH=${PATH/:${dir}\/bin:/:}; done
 	PATH=${PATH#:}; PATH=${PATH%:}
 
-	[ "$version" = system ] && return
+	[ "$1" = system ] && return
 
 	local root=
 	for dir in "${NODES[@]}"; do
-		[ "$(basename "$dir")" = "$version" ] && root=$dir && break
+		[ "$(basename "$dir")" = "$1" ] && root=$dir && break
 	done
 
-	[ -z "$root" ] && echo "Sorry, couldn't locate Node $version." && return 1
+	[ -z "$root" ] && echo "Sorry, couldn't locate Node $1" && return 1
 	PATH=$root/bin:$PATH
 
 	# No news is good news.
