@@ -1,3 +1,7 @@
+## Unreleased
+- `chnode` will return with a non-zero exit code when unable to locate the Node
+  version requested.
+
 ## 1.1.0 (Apr 22, 2015)
 - Detects current version correctly should it contain a revision number
   (v0.12.2_1).

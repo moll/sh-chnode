@@ -74,7 +74,7 @@ chnode() {
 				[ "$(basename "$dir")" = "$version" ] && root=$dir && break
 			done
 
-			[ -z "$root" ] && echo "Sorry, couldn't locate Node $version." && return
+			[ -z "$root" ] && echo "Sorry, couldn't locate Node $version." && return 1
 			PATH=$root/bin:$PATH
 			# No news is good news:
 			#echo "Switched to Node $version at $root."
