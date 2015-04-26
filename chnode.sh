@@ -8,79 +8,118 @@ fi
 NODES=()
 
 chnode() {
+	local verbose=0
 	[ -z "$NODES" ] && NODES=1 && chnode --silent-refresh
 
-	case "$1" in
-		"" | -h | -\? | --help)
-			echo "Usage: chnode [OPTIONS] VERSION"
-			echo "       chnode [OPTIONS] system"
-			echo
-			echo "Options:"
-			echo "    -h, -?, --help  Display this help."
-			echo "    -l, --list      List all available Node versions."
-			echo "    -r, --refresh   Refresh and find all available Node versions."
-			echo "    -v, --version   Display version information."
-			echo
+	local arg=
+	for arg in "\0" "$@"; do
+		case "$arg" in
+			"\0")
+				set --
+				;;
 
-			echo "Available Node versions:"
-			local current="$(node --version 2>/dev/null)"; current=${current#v}
-			local version
-			for version in $(chnode --list); do
-				local marker=
-				[ -n "$current" -a "$current" = "${version%_*}" ] && marker=" *"
-				echo "    $version$marker"
-			done
+			--usage)
+				echo "Usage: chnode [OPTIONS] VERSION"
+				echo "       chnode [OPTIONS] system"
+				echo "Try \"chnode --help\" for more information."
+				return
+				;;
 
-			echo
-			echo "For help or feedback please contact Andri Möll <andri@dot.ee> or"
-			echo "see https://github.com/moll/sh-chnode."
-			;;
+			-h | -\? | --help)
+				local usage="$(chnode --usage)"
 
-		-v | --version)
-			echo "Chnode.sh v1.1.0"
-			echo "Copyright (C) 2013– Andri Möll <andri@dot.ee>"
-			;;
+				echo "${usage%$'\n'*}"
+				echo
+				echo "Options:"
+				echo "    -h, -?, --help  Display this help."
+				echo "    -l, --list      List all available Node versions."
+				echo "    -r, --refresh   Refresh and find all available Node versions."
+				echo "    -V, --verbose   Be verbose when changing versions."
+				echo "    -v, --version   Display version information."
+				echo
 
-		-r | --refresh)
-			echo "Refreshing..."
-			chnode --silent-refresh
-			chnode --list
-			;;
+				echo "Available Node versions:"
+				local current="$(node --version 2>/dev/null)"; current=${current#v}
+				local version=
+				for version in $(chnode --list); do
+					local marker=
+					[ -n "$current" -a "$current" = "${version%_*}" ] && marker=" *"
+					echo "    $version$marker"
+				done
 
-		--silent-refresh)
-			NODES=()
-			[ -d /usr/local/Cellar/node ] && NODES+=(/usr/local/Cellar/node/*)
-			;;
+				echo
+				echo "For help or feedback please contact Andri Möll <andri@dot.ee> or"
+				echo "see https://github.com/moll/sh-chnode."
+				return
+				;;
 
-		-l | --list)
-			local dir
-			for dir in "${NODES[@]}"; do echo "$(basename "$dir")"; done
-			;;
+			-V | --verbose)
+				verbose=1
+				;;
 
-		*)
-			# Support both v0.11.5 and 0.11.5 syntax.
-			local version="${1#v}"
+			-v | --version)
+				echo "Chnode.sh v1.1.0"
+				echo "Copyright (C) 2013– Andri Möll <andri@dot.ee>"
+				return
+				;;
 
-			# Clean up PATH from old Node versions and ugly stray colons.
-			local dir
-			PATH=":$PATH:"
-			for dir in "${NODES[@]}"; do PATH=${PATH/:${dir}\/bin:/:}; done
-			PATH=${PATH#:}; PATH=${PATH%:}
+			-r | --refresh)
+				chnode --silent-refresh
+				chnode --list
+				return
+				;;
 
-			[ "$version" = system ] && return
+			--silent-refresh)
+				NODES=()
+				[ -d /usr/local/Cellar/node ] && NODES+=(/usr/local/Cellar/node/*)
+				return
+				;;
 
-			local root
-			for dir in "${NODES[@]}"; do
-				[ "$(basename "$dir")" = "$version" ] && root=$dir && break
-			done
+			-l | --list)
+				local dir=
+				for dir in "${NODES[@]}"; do echo "$(basename "$dir")"; done
+				return
+				;;
 
-			[ -z "$root" ] && echo "Sorry, couldn't locate Node $version." && return 1
-			PATH=$root/bin:$PATH
-			# No news is good news:
-			#echo "Switched to Node $version at $root."
+			-*)
+				echo "chnode: Unrecognized option: $arg" >&2
+				chnode --usage >&2
+				return 2
+				;;
 
-			# Have shell refresh its cache of binaries.
-			hash -r
-			;;
-	esac
+			*)
+				set -- "$@" "$arg"
+				;;
+		esac
+	done
+
+	[ $# -eq 0 ] && chnode --help && return
+	[ $# -gt 1 ] && chnode --usage >&2 && return 2
+
+	# Support both v0.11.5 and 0.11.5 syntax.
+	local version="${1#v}"
+
+	# Clean up PATH from old Node versions and ugly stray colons.
+	local dir=
+	PATH=":$PATH:"
+	for dir in "${NODES[@]}"; do PATH=${PATH/:${dir}\/bin:/:}; done
+	PATH=${PATH#:}; PATH=${PATH%:}
+
+	[ "$version" = system ] && return
+
+	local root=
+	for dir in "${NODES[@]}"; do
+		[ "$(basename "$dir")" = "$version" ] && root=$dir && break
+	done
+
+	[ -z "$root" ] && echo "Sorry, couldn't locate Node $version." && return 1
+	PATH=$root/bin:$PATH
+
+	# No news is good news.
+	if [ $verbose -gt 0 ]; then
+		echo "Switched to Node $(basename "$root") at $root."
+	fi
+
+	# Have shell refresh its cache of binaries.
+	hash -r
 }

@@ -1,6 +1,8 @@
 ## Unreleased
 - `chnode` will return with a non-zero exit code when unable to locate the Node
   version requested.
+- Adds `-V` and `--verbose` for printing out the version and path switched to.  
+  By default, no news is good news.
 
 ## 1.1.0 (Apr 22, 2015)
 - Detects current version correctly should it contain a revision number
