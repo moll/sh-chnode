@@ -105,7 +105,11 @@ chnode() {
 	for dir in "${NODES[@]}"; do PATH=${PATH/:${dir}\/bin:/:}; done
 	PATH=${PATH#:}; PATH=${PATH%:}
 
-	[ "$1" = system ] && return
+	if [ "$1" = system ]; then
+		local current="$(node --version 2>/dev/null)"; current=${current#v}
+		[ $verbose -gt 0 ] && echo "Switched to Node $current."
+		return
+	fi
 
 	local root=
 	local version=
