@@ -1,4 +1,4 @@
-## Unreleased
+## 1.2.0 (Apr 26, 2015)
 - `chnode` will return with a non-zero exit code when unable to locate the Node
   version requested.
 - Renames `-v` to `-V` as the `--version` shorthand to make room for
