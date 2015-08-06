@@ -1,11 +1,11 @@
-PREFIX=/usr/local
+PREFIX = /usr/local
 
 love:
 	@echo "Feel like makin' love."
 
 install:
-	@mkdir -p $(PREFIX)/share/chnode
-	cp chnode.sh $(PREFIX)/share/chnode
+	mkdir -p "$(PREFIX)/bin"
+	install -m 755 chnode.sh "$(PREFIX)/bin/chnode"
 
 pack:
 	@file=$$(npm pack); echo "$$file"; tar tf "$$file"
