@@ -1,3 +1,8 @@
+## Unreleased
+- Adds an `install` target to `Makefile`.  
+  Use it with `make install PREFIX=/usr/local`.  
+  Thanks, [Benjamin Feng](http://www.fengb.info), for the help!
+
 ## 1.2.0 (Apr 26, 2015)
 - `chnode` will return with a non-zero exit code when unable to locate the Node
   version requested.
